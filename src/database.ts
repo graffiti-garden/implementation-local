@@ -1,7 +1,7 @@
 import type {
   Graffiti,
   GraffitiObjectBase,
-  GraffitiLocation,
+  GraffitiObjectUrl,
   JSONSchema,
   GraffitiSession,
 } from "@graffiti-garden/api";
@@ -208,7 +208,7 @@ export class GraffitiLocalDatabase
     }
   }
 
-  protected async allDocsAtLocation(locationOrUri: GraffitiLocation | string) {
+  protected async allDocsAtLocation(locationOrUri: GraffitiObjectUrl | string) {
     const uri = unpackLocationOrUri(locationOrUri) + "/";
     const results = await (
       await this.db
@@ -231,8 +231,8 @@ export class GraffitiLocalDatabase
     return docs;
   }
 
-  protected docId(location: GraffitiLocation) {
-    return location.uri + "/" + randomBase64();
+  protected docId(location: GraffitiObjectUrl) {
+    return location.url + "/" + randomBase64();
   }
 
   get: Graffiti["get"] = async (...args) => {
@@ -275,7 +275,7 @@ export class GraffitiLocalDatabase
    * spared.
    */
   protected async deleteAtLocation(
-    locationOrUri: GraffitiLocation | string,
+    locationOrUri: GraffitiObjectUrl | string,
     options: {
       keepLatest?: boolean;
       session?: GraffitiSession;
@@ -386,10 +386,10 @@ export class GraffitiLocalDatabase
       );
     }
 
-    if (objectPartial.uri) {
+    if (objectPartial.url) {
       let oldObject: GraffitiObjectBase | undefined;
       try {
-        oldObject = await this.get(objectPartial.uri, {}, session);
+        oldObject = await this.get(objectPartial.url, {}, session);
       } catch (e) {
         if (e instanceof GraffitiErrorNotFound) {
           if (!this.options.allowSettingArbitraryUris) {
@@ -417,7 +417,7 @@ export class GraffitiLocalDatabase
       value: objectPartial.value,
       channels: objectPartial.channels,
       allowed: objectPartial.allowed,
-      uri: objectPartial.uri ?? this.origin + randomBase64(),
+      url: objectPartial.url ?? this.origin + randomBase64(),
       actor: session.actor,
       tombstone: false,
       lastModified,

@@ -10,13 +10,13 @@ import type {
   GraffitiPatch,
   JSONSchema,
   GraffitiSession,
-  GraffitiLocation,
+  GraffitiObjectUrl,
 } from "@graffiti-garden/api";
 import type { Ajv } from "ajv";
 import type { applyPatch } from "fast-json-patch";
 
-export function unpackLocationOrUri(locationOrUri: GraffitiLocation | string) {
-  return typeof locationOrUri === "string" ? locationOrUri : locationOrUri.uri;
+export function unpackLocationOrUri(locationOrUri: GraffitiObjectUrl | string) {
+  return typeof locationOrUri === "string" ? locationOrUri : locationOrUri.url;
 }
 
 export function randomBase64(numBytes: number = 24) {
