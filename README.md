@@ -1,3 +1,11 @@
+# ⚠️ Deprecated!! ⚠️
+
+All Graffiti code has been merged into the [**Graffiti monorepo**](https://github.com/graffiti-garden/graffiti).
+
+There you can find [the current local implementation](https://github.com/graffiti-garden/graffiti/tree/main/implementations/local) for the up to date descendant of this code.
+
+What follows is kept for **archival purposes**.
+
 # Graffiti Local Implementation
 
 This is a local implementation of the [Graffiti API](https://api.graffiti.garden/classes/Graffiti.html)
